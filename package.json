@@ -1,6 +1,6 @@
 {
   "name": "imb_plugin1",
-  "version": "1.9.7",
+  "version": "1.9.8",
   "description": "Librari per IMB per te printuar per GULF",
   "main": "www/pc700print.js",
   "scripts": {
