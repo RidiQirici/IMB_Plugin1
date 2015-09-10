@@ -4,9 +4,9 @@
     id="imb.ridiqirici.plugin.cordova.pc700print"
     version="1.0.0">
 
-  <name>Pc700Print</name>
-  <description>Printim ne printer PC700.</description>
-  <repo>https://github.com/RidiQirici/Pc700Print.git</repo>
+  <name>IMB_Plugin1</name>
+  <description>Plugin per printimet e pajisjes GULF</description>
+  <repo>https://github.com/RidiQirici/IMB_Plugin1</repo>
   <license>Apache 2.0</license>
   <keywords>cordova,pc700</keywords>
 
