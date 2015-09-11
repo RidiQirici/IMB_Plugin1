@@ -23,9 +23,10 @@
   <asset src="www/pc700print.js" target="pc700print.js" />
 
    <!-- android -->
-  <platform name="android">
+  <platform name="android"> 
 
     <source-file src="src/android/PrintPc700.java" target-dir="src/imb/ridiqirici/plugin/cordova/pc700print" />
+    <source-file src="src/android/lib/libPC700.so" target-dir="lib"/>
 
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="PrintPc700">
@@ -37,7 +38,6 @@
     </config-file>
 
     <source-file src="src/android/lib/pc700Print.jar" target-dir="libs" framework="true"/>
-	<source-file src="src/android/lib/libPC700.so" target-dir="lib" framework="true"/>
   </platform>
 
 </plugin>
