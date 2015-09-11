@@ -37,7 +37,7 @@
     </config-file>
 
     <source-file src="src/android/lib/pc700Print.jar" target-dir="libs" framework="true"/>
-	<lib-file src="src/android/lib/libPC700.so" target-dir="lib" framework="true"/>
+	<source-file src="src/android/lib/libPC700.so" target-dir="lib" framework="true"/>
   </platform>
 
 </plugin>
