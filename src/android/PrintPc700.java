@@ -12,7 +12,7 @@ import java.io.InputStream;
 import org.apache.cordova.CallbackContext;
 import org.json.JSONArray;
 import org.json.JSONException;
-
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -57,6 +57,7 @@ public class PrintPc700 extends CordovaPlugin{
     private boolean veprimiKryer;
     static PrinterClassSerialPort printerClass = null;
 	
+	@SuppressLint("NewApi")
 	@Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 		this.mesazhi = callbackContext;
@@ -65,7 +66,7 @@ public class PrintPc700 extends CordovaPlugin{
         if (PRINT_TEXT.equals(action)) {
         	String message = args.getString(0);
             if (!message.isEmpty()) {
-                this.printoTekstin(message);
+                this.printoTekstinProve(message);
             } else {
                 this.veprimiKryer = false;
                 this.mesazhi.error("Perdoruesi nuk ka specifikuar te dhena per tu printuar");
@@ -111,6 +112,39 @@ public class PrintPc700 extends CordovaPlugin{
         	this.mesazhi.error("Gabim gjate printimit te tekstit! " + e.getMessage() + " " + e.toString() + " " + this.veprimiKryer );
 			Log.e(TAG, e.getMessage());
 			return this.veprimiKryer;
+		}
+    }
+	
+	public String printoTekstinProve(String stringaXPrintim) {
+		this.veprimiKryer = true;
+		try {
+			printerClass = new PrinterClassSerialPort();
+			this.veprimiKryer = printerClass.open();
+			
+			if (!this.veprimiKryer)
+			{
+				this.veprimiKryer = false;
+				this.mesazhi.error("Ndodhi nje problem gjate hapjes se portes seriale 38400!");
+				return "Ndodhi nje problem gjate hapjes se portes seriale 38400!";
+			}
+			
+			this.veprimiKryer = printerClass.printText(stringaXPrintim);
+			
+			if (!this.veprimiKryer)
+			{
+				printerClass.close();
+				this.veprimiKryer = false;
+				this.mesazhi.error("Printimi i tekstit nuk u krye me sukses! ");
+				return "Printimi i tekstit nuk u krye me sukses! ";
+			}
+			printerClass.close();
+			this.mesazhi.success("Printimi i tekstit u krye me sukses! ");
+			return "Printimi i tekstit u krye me sukses! ";
+		} catch (Exception e) {
+			this.veprimiKryer = false;
+        	this.mesazhi.error("Gabim gjate printimit te tekstit! " + e.getMessage() + " " + e.toString() + " " + this.veprimiKryer );
+			Log.e(TAG, e.getMessage());
+			return"Gabim gjate printimit te tekstit! " + e.getMessage() + " " + e.toString();
 		}
     }
 }
